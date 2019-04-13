@@ -1,5 +1,6 @@
 import SimpleHTTPServer
 import SocketServer
+import sys
 import os
 
 
@@ -10,7 +11,7 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
 Handler.extensions_map['.wasm'] = 'application/wasm'
 
-web_dir = os.path.join(os.path.dirname(__file__), 'target/dist')
+web_dir = os.path.join(os.path.dirname(__file__), sys.argv[1])
 print(web_dir)
 os.chdir(web_dir)
 

@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script wasm="./app.wasm" src="./app.wasm.js"></script>
+    <script>
+        konan.libraries.push({"alert":function(msg){ alert(msg);}});
+        // const filename = "./app.wasm";
+        //
+        // async function main() {
+        //     const res = await fetch(filename);
+        //     const buf = await res.arrayBuffer();
+        //     instantiateAndRun(buf, [filename]);
+        // }
+        //
+        // main();
+    </script>
+</body>
+</html>

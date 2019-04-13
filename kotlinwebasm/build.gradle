@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://kotlin.bintray.com/kotlinx" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:$kotlin_native_version"
+    }
+}
+
+apply plugin: 'konan'
+
+
+task createDistrib(type: Copy) {
+    from "${project.buildDir}/konan/bin/wasm32"
+    into "${project.buildDir}/dist"
+
+    from "web"
+    into "${project.buildDir}/dist"
+}
+
+build.finalizedBy(createDistrib)
+
+
+konanArtifacts {
+    program('app', targets: ['wasm32']) {
+         srcDir 'src/main/kotlin'        
+         libraries {
+             useRepo 'lib'
+             klib 'dom'
+         }
+    }
+}
+
